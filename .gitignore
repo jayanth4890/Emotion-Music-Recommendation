@@ -1,0 +1,30 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Virtual environment
+.venv/
+env/
+venv/
+ENV/
+
+# Model Weights and Large Binary Files
+*.h5
+*.npy
+
+# macOS system files
+.DS_Store
+
+# Streamlit config/cache
+.streamlit/
+
+# IDE files
+.vscode/
+.idea/
+
+# Runtime camera frame
+assets/temp_frame.jpg
