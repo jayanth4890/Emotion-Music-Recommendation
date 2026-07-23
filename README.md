@@ -11,13 +11,13 @@ Webcam Feed (OpenCV VideoCapture)
     ↓
 Throttled DeepFace Emotion Engine (500 ms Inference Interval)
     ↓
-Emotion Confidence Distribution (Happy, Sad, Angry, Fear, Surprise, Neutral, Disgust)
+25-Second Dominant Emotion Aggregation
     ↓
-Music Recommendation Engine (Language, Singer, Genre Query Encoder)
+Google Gemini Song Recommendation Engine
     ↓
-Clickable Streamlit Link Buttons (YouTube & Spotify)
+Deezer Preview Metadata Lookup
     ↓
-Interactive Streamlit Dashboard & History Logger
+Embedded Streamlit Music Player
 ```
 
 ---
@@ -28,8 +28,8 @@ Interactive Streamlit Dashboard & History Logger
 - **Throttled DeepFace Inference**: Emotion analysis is executed once every 500 ms (2 Hz), reusing bounding box predictions between frames for smooth rendering.
 - **Camera Controls**: Includes explicit **▶ Start Camera** and **⏹ Stop Camera** controls. Camera is OFF by default on application launch.
 - **7 Emotion Classes**: Detects `Happy`, `Sad`, `Angry`, `Fear`, `Surprise`, `Neutral`, and `Disgust` with real-time confidence scores.
-- **Clickable Recommendation Links**: Generates encoded search query URLs via `st.link_button` for both **YouTube** and **Spotify** without popup blockers.
-- **Session History Logging**: Timestamped table recording recommendation queries, detected emotion, target artist, and direct search links.
+- **AI Song Recommendations**: Sends the completed dominant emotion window and user preferences to Google Gemini for JSON-only song recommendations.
+- **Embedded Music Playback**: Searches Deezer for album artwork and preview URLs, then plays previews directly inside Streamlit with `st.audio()`.
 
 ---
 
@@ -40,7 +40,8 @@ Emotion-Music-Recommendation/
 │
 ├── app.py                     # Main Streamlit web application & camera loop
 ├── emotion_detector.py        # DeepFace emotion recognition module & overlay renderer
-├── music_recommender.py       # Recommendation query engine (YouTube & Spotify)
+├── ai_recommender.py          # Gemini song recommendation and Deezer merge layer
+├── music_player.py            # Deezer track lookup, album art, preview URL, and caching
 ├── utils.py                   # Helper functions (logging, image conversion)
 ├── assets/                    # Assets directory
 ├── requirements.txt           # Environment dependencies list
@@ -62,7 +63,13 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 3. Launch Streamlit Web Application
+### 3. Configure Gemini API Key
+Create `.env` from `.env.example` and set:
+```bash
+GEMINI_API_KEY=YOUR_API_KEY
+```
+
+### 4. Launch Streamlit Web Application
 ```bash
 streamlit run app.py
 ```
@@ -73,3 +80,4 @@ streamlit run app.py
 
 - **Camera Permission**: If the camera feed displays an error, ensure your terminal / IDE has Camera permission enabled under macOS *System Settings > Privacy & Security > Camera*.
 - **Model Warm-up**: On initial launch, DeepFace automatically warms up the emotion model weights. Subsequent reruns leverage `@st.cache_resource` for instant execution.
+# Emotion-Music-Recommendation--
