@@ -81,3 +81,4 @@ streamlit run app.py
 - **Camera Permission**: If the camera feed displays an error, ensure your terminal / IDE has Camera permission enabled under macOS *System Settings > Privacy & Security > Camera*.
 - **Model Warm-up**: On initial launch, DeepFace automatically warms up the emotion model weights. Subsequent reruns leverage `@st.cache_resource` for instant execution.
 # Emotion-Music-Recommendation--
+# Emotion-Music-Recommendation--
